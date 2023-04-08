@@ -1,0 +1,23 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+pytest = "==7.1.1"
+pandas = "==1.5.3"
+scikit-learn = "==1.2.2"
+pdfreader = "==0.1.12"
+everything-tkinter = "==0.2"
+split-file-reader = "==0.1.0"
+spacy = "==3.5.1"
+
+[dev-packages]
+
+
+[scripts]
+post-install = "python -m spacy download en_core_web_sm"
+
+
+[requires]
+python_version = "3.10"

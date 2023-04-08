@@ -1,0 +1,7 @@
+pytest==7.1.1
+split_file_reader==0.1.0
+pandas==1.5.3
+scikit-learn==1.2.2
+pdfreader==0.1.12
+Everything-Tkinter==0.2
+spacy==3.5.1
