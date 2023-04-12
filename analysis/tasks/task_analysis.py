@@ -70,6 +70,26 @@ def analyze_tasks(json_obj, output, experience_path):
         files_changed = len(commit["changes"])
         # Extract the commit message
         message = commit["message"]
+
+        # total code addition/deletions
+        total_file_additions = 0
+        total_file_deletions = 0
+
+        for change in commit["changes"]:
+            total_file_additions += change["file_additions"]
+            total_file_deletions += change["file_deletions"]
+
+        # Duration, code quality and code complexity is the focus here
+        duration = calculate_duration(authored_at, commited_at)
+        has_refactoring = get_has_refactoring(
+            commit["message"], commit['is_refactoring'])
+        code_quality = calculate_code_quality(
+            files_affected, files_changed, added_lines, deleted_lines, total_file_additions, total_file_deletions, has_refactoring)
+        has_bug_fixing = get_has_bug_fixing(
+            commit["message"], commit['is_bug_fixing'] or commit['is_fix_related'])
+        code_complexity = calculate_task_complexity(files_affected, files_changed, added_lines,
+                                                    deleted_lines, has_bug_fixing)
+
         # Use regex to match the task ID and message
         match = re.match(regex, message)
         if match:
@@ -97,6 +117,9 @@ def analyze_tasks(json_obj, output, experience_path):
                           "commit_time": commit_time,
                           "auther_experience": auther_experience,
                           "committer_experience": committer_experience,
+                          "code_quality": code_quality,
+                          "code_complexity": code_complexity,
+                          "duration": duration,
                           })
 
         else:
@@ -122,27 +145,13 @@ def analyze_tasks(json_obj, output, experience_path):
                           "commit_time": commit_time,
                           "auther_experience": auther_experience,
                           "committer_experience": committer_experience,
+                          "code_quality": code_quality,
+                          "code_complexity": code_complexity,
+                          "duration": duration,
                           })
 
     # write out the unique values to the output CSV file
     output_file_name = os.path.basename(output)
-
-    # total code addition/deletions
-    total_file_additions = 0
-    total_file_deletions = 0
-
-    for change in commit["changes"]:
-        total_file_additions += change["file_additions"]
-        total_file_deletions += change["file_deletions"]
-
-    # Duration, code quality and code complexity is the focus here
-    duration = calculate_duration(authored_at, commited_at)
-    has_refactoring = get_has_refactoring(commit["message"], commit['is_refactoring'])
-    code_quality = calculate_code_quality(
-        files_affected, files_changed, added_lines, deleted_lines, total_file_additions, total_file_deletions, has_refactoring)
-    has_bug_fixing = get_has_bug_fixing(commit["message"], commit['is_bug_fixing'] or commit['is_fix_related'])
-    code_complexity = calculate_task_complexity(files_affected, files_changed, added_lines,
-                                                deleted_lines, has_bug_fixing)
 
     # Write the list of tasks to a CSV file
     with open(output, mode='w') as f:
@@ -172,7 +181,7 @@ def analyze_tasks(json_obj, output, experience_path):
                          "code_complexity",
                          "duration",
                          ])
-        
+
         for task in tasks:
             writer.writerow([task["id"],
                              task["message"],
@@ -195,9 +204,9 @@ def analyze_tasks(json_obj, output, experience_path):
                              task["commit_time"],
                              task["auther_experience"],
                              task["committer_experience"],
-                             code_quality,
-                             code_complexity,
-                             duration
+                             task["code_quality"],
+                             task["code_complexity"],
+                             task["duration"],
                              ])
 
     # Print the number of unique tasks found

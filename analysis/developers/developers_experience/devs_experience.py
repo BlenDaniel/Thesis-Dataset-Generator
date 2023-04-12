@@ -1,7 +1,7 @@
 import datetime
 from utils.file_utils import read_csv_file, read_json_file
 import csv
-
+from dateutil import parser
 
 def generate_csv_devs_experience_the_years(input_csv_list, json_obj, output):
 
@@ -155,8 +155,10 @@ def get_list_of_years(input_list):
 
     years = set()
     for row in input_list[1:]:
-        authored_at = datetime.datetime.strptime(row[5], '%m/%d/%Y, %H:%M:%S')
-        committed_at = datetime.datetime.strptime(row[7], '%m/%d/%Y, %H:%M:%S')
+        a_at = parser.parse(row[5]).strftime('%m/%d/%Y, %H:%M:%S')
+        c_at = parser.parse(row[7]).strftime('%m/%d/%Y, %H:%M:%S')
+        authored_at = datetime.datetime.strptime(a_at, '%m/%d/%Y, %H:%M:%S')
+        committed_at = datetime.datetime.strptime(c_at, '%m/%d/%Y, %H:%M:%S')
         years.add(authored_at.year)
         years.add(committed_at.year)
 

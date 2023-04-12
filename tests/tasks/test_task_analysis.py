@@ -51,7 +51,10 @@ def test_analyze_messages(tmp_path, get_csv_from_json, get_json_object):
             "commited_year": "2019",
             "commit_time": 4,
             "auther_experience": "0",
-            "committer_experience": "0"
+            "committer_experience": "0",
+            "code_quality": 2.7,
+            "code_complexity": 3.6,
+            "duration": 1095
         },
         {
             "id": "AIRFLOW-1234",
@@ -71,7 +74,10 @@ def test_analyze_messages(tmp_path, get_csv_from_json, get_json_object):
             "commited_year": "2014",
             "commit_time": 4,
             "auther_experience": "0",
-            "committer_experience": "0"
+            "committer_experience": "0",
+            "code_quality": 5.0,
+            "code_complexity": 5.0,
+            "duration": 0
         },
         {
             "id": "AIRFLOW-5678",
@@ -91,7 +97,10 @@ def test_analyze_messages(tmp_path, get_csv_from_json, get_json_object):
             "commited_year": "2019",
             "commit_time": 3,
             "auther_experience": "1",
-            "committer_experience": "1"
+            "committer_experience": "1",
+            "code_quality": 3.2,
+            "code_complexity": 1.2,
+            "duration": 0
         }
     ]
 
@@ -150,9 +159,10 @@ def test_analyze_messages(tmp_path, get_csv_from_json, get_json_object):
         '4',
         '0',
         '0',
-        '3.2',
-        '1.2',
+        '5.0',
+        '5.0',
         '0',
+
     ], [
         '',
         'Fix a bug',
@@ -175,9 +185,9 @@ def test_analyze_messages(tmp_path, get_csv_from_json, get_json_object):
         '4',
         '0',
         '0',
-        '3.2',
-        '1.2',
-        '0',
+        '2.7',
+        '3.6',
+        '1095',
     ], [
         'AIRFLOW-5678',
         'Update documentation',

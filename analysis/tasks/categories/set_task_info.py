@@ -14,4 +14,4 @@ def set_task_info(output, new_output):
     output_file = os.path.join(
         os.path.dirname(output), new_output)
     df.to_csv(output_file, index=False)
-    print(f"There are {len(df)} rows affected.")
+    print(f"There are {len(df)} rows updated.")
