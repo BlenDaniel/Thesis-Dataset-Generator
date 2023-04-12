@@ -5,28 +5,18 @@ This is a repository to generate useable data from any github project.
 1. Requirements
     - CSV: 
         CSV datasheet of the history of the repository. 
-    - JSON
+    - JSON:
         Json of the history of the repository. 
 
 2. Steps to produce and what the outputs are:
-    1. Get a list of all the developers associated with the project <br>
-        Input: CSV (data sheet of the history of the repository)<br>
-        Ouput: CSV <br>
-    2. Get developers experience over the years since the creation date of the project. <br>
-        Input: CSV (data sheet of the history of the repository), JSON (the history of the repository)<br>
-        Output: CSV<br>
-    3. Get developers authering of a task over the years since the creation date of the project. <br>
-        Input: CSV (data sheet of the history of the repository), JSON (the history of the repository)<br>
-        Output: CSV<br>
-    4. Get developers commit or provisioning of a task over the years since the creation date of the project. <br>
-        Input: CSV (data sheet of the history of the repository), JSON (the history of the repository)<br>
-        Output: CSV<br>
-    5. Getting task information <br>
-        Input: JSON (the history of the repository), CSV (getting the output of developers experience (2nd Step))<br>
-        Output: CSV<br>
-    6. Setting task information<br>
-        Input: CSV (getting the output of tasks (5th Step))<br>
-        Output: CSV<br>
+    | Step | Description | Input | Output |
+    | --- | --- | --- | --- |
+    | 1 | Get a list of all the developers associated with the project | CSV (data sheet of the history of the repository) | CSV |
+    | 2 | Get developers experience over the years since the creation date of the project. | CSV (data sheet of the history of the repository), JSON (the history of the repository) | CSV |
+    | 3 | Get developers authering of a task over the years since the creation date of the project. | CSV (data sheet of the history of the repository), JSON (the history of the repository) | CSV |
+    | 4 | Get developers commit or provisioning of a task over the years since the creation date of the project. | CSV (data sheet of the history of the repository), JSON (the history of the repository) | CSV |
+    | 5 |  Getting task information | JSON (the history of the repository), CSV (getting the output of developers experience (2nd Step)) | CSV |
+    | 6 | Setting task information | CSV (getting the output of tasks (5th Step)) | CSV |
 
 
 <hr>
