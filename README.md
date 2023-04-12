@@ -9,39 +9,36 @@ This is a repository to generate useable data from any github project.
         Json of the history of the repository. 
 
 2. Steps to produce and what the outputs are:
-    1. Get a list of all the developers associated with the project
-        Input: CSV (data sheet of the history of the repository)
-        Ouput: CSV 
-    2. Get developers experience over the years since the creation date of the project. 
-        Input: CSV (data sheet of the history of the repository), JSON (the history of the repository)
-        Output: CSV
-    3. Get developers authering of a task over the years since the creation date of the project. 
-        Input: CSV (data sheet of the history of the repository), JSON (the history of the repository)
-        Output: CSV
-    4. Get developers commit or provisioning of a task over the years since the creation date of the project. 
-        Input: CSV (data sheet of the history of the repository), JSON (the history of the repository)
-        Output: CSV
-    5. Getting task information 
-        Input: JSON (the history of the repository), CSV (getting the output of developers experience (2nd Step))
-        Output: CSV
-    6. Setting task information
-        Input: CSV (getting the output of tasks (5th Step))
-        Output: CSV
+    1. Get a list of all the developers associated with the project <br>
+        Input: CSV (data sheet of the history of the repository)<br>
+        Ouput: CSV <br>
+    2. Get developers experience over the years since the creation date of the project. <br>
+        Input: CSV (data sheet of the history of the repository), JSON (the history of the repository)<br>
+        Output: CSV<br>
+    3. Get developers authering of a task over the years since the creation date of the project. <br>
+        Input: CSV (data sheet of the history of the repository), JSON (the history of the repository)<br>
+        Output: CSV<br>
+    4. Get developers commit or provisioning of a task over the years since the creation date of the project. <br>
+        Input: CSV (data sheet of the history of the repository), JSON (the history of the repository)<br>
+        Output: CSV<br>
+    5. Getting task information <br>
+        Input: JSON (the history of the repository), CSV (getting the output of developers experience (2nd Step))<br>
+        Output: CSV<br>
+    6. Setting task information<br>
+        Input: CSV (getting the output of tasks (5th Step))<br>
+        Output: CSV<br>
 
 
 <hr>
 
-## Introduction
 
-
-
-# Installation Guides
+## Installation Guides
 
 For the proper functioning of the application, you need to have python3 and pip3 installed. You can find python installation guide [here](https://www.python.org/downloads/) and pip installation guide [here](https://pip.pypa.io/en/stable/installation/). \
 Once python and pip are installed, there are various python modules that are also required. \
 <br>
 
-# Procedure for running the flask-app
+## Procedure for running the flask-app
 ### Install a virtual machine
 
     pip3 install pipenv
@@ -73,7 +70,7 @@ Once it's installed, you can create a virtual environment and activate it using 
 
 
 
-# Tests
+## Tests
 To run the test cases, you need to be in the virtual environment and also have your cache system running. 
 <br>
 
