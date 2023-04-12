@@ -23,7 +23,7 @@ categories = ["Feature requests or new feature", "Bug fixes",
               "Code Refactoring", "Documentation", "Testing", "Deployment", "Maintenance"]
 
 
-def get_task_type(message):
+def get_task_info(message):
     # Initialize counters for each category
     category_counts = {category: 0 for category in categories}
 
@@ -54,5 +54,30 @@ def get_task_type(message):
     else:
         task_type = [category for category,
                      count in category_counts.items() if count == max_count][0]
+        
+    # Check if task has bug fixes or code refactors
+    task_has_bug_fixes = "true" if category_counts["Bug fixes"] != 0 else "false"
+    task_has_codes_refactors = "true" if category_counts["Code Refactoring"] != 0 else "false"
 
-    return task_type
+    return task_type, task_has_bug_fixes, task_has_codes_refactors
+
+
+def get_has_bug_fixing(message, has_bugs):
+    # Analyze the message with spaCy
+    doc = nlp(message.lower())
+    # Check for keywords and phrases related to each category
+    for token in doc:
+        if any(keyword in token.text for keyword in bug_keywords) or has_bugs:
+            return True
+        
+    return False
+
+def get_has_refactoring(message, has_refactor):
+    # Analyze the message with spaCy
+    doc = nlp(message.lower())
+    # Check for keywords and phrases related to each category
+    for token in doc:
+        if any(keyword in token.text for keyword in refactoring_keywords) or has_refactor:
+            return True
+        
+    return False

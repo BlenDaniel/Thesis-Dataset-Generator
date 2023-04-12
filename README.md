@@ -1,4 +1,33 @@
-# Parser
+# Useable Data Generator
+
+This is a repository to generate useable data from any github project. 
+
+1. Requirements
+    - CSV: 
+        CSV datasheet of the history of the repository. 
+    - JSON
+        Json of the history of the repository. 
+
+2. Steps to produce and what the outputs are:
+    1. Get a list of all the developers associated with the project
+        Input: CSV (data sheet of the history of the repository)
+        Ouput: CSV 
+    2. Get developers experience over the years since the creation date of the project. 
+        Input: CSV (data sheet of the history of the repository), JSON (the history of the repository)
+        Output: CSV
+    3. Get developers authering of a task over the years since the creation date of the project. 
+        Input: CSV (data sheet of the history of the repository), JSON (the history of the repository)
+        Output: CSV
+    4. Get developers commit or provisioning of a task over the years since the creation date of the project. 
+        Input: CSV (data sheet of the history of the repository), JSON (the history of the repository)
+        Output: CSV
+    5. Getting task information 
+        Input: JSON (the history of the repository), CSV (getting the output of developers experience (2nd Step))
+        Output: CSV
+    6. Setting task information
+        Input: CSV (getting the output of tasks (5th Step))
+        Output: CSV
+
 
 <hr>
 
@@ -37,8 +66,8 @@ Once it's installed, you can create a virtual environment and activate it using 
 
 
 ###  To deactivate the virtual environment, you can use this command:
-
     exit
+
 
 
 

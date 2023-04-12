@@ -1,5 +1,5 @@
 import csv
-from analysis.csv_analysis import analyze_data_devs
+from analysis.developers.devs_analysis import analyze_data_devs
 
 from utils.file_utils import read_csv_file
 import os
