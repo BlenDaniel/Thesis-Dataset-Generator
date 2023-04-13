@@ -203,7 +203,7 @@ committer_experience:
 | --- | --- |
 | Integer | Committers experience in the company over the years they worked |
 
-code_quality: 
+code_quality: <br>
 Calculates the code quality score based on the number of files affected, the number of files changed, the total 
 lines added in the commit, the total lines deleted in the commit, the number of file additions and the number of 
 file deletions, and whether the commit includes code refactoring. Returns a score between 0.0 and 5.0, rounded to 1 decimal place.
@@ -213,19 +213,20 @@ References are listed for the creating of the function.
 | Integer | Quality calculated |
 
 code_complexity: 
-The calculate_code_complexity function takes in the following parameters: total_files_affected, total_files_changed, total_lines_added_in_commit, total_lines_deleted_in_commit, and has_bug_fixing. It calculates the McCabe's complexity metric using the radon.complexity module and adjusts the complexity metric if the commit includes bug fixing. The function then calculates the code complexity score by scaling the complexity metric to a range of 0.0 to 5.0. The function returns the calculated code complexity score.
+<br>
+Calculates the code complexity score based on the following parameters: total files affected, total files changed, total lines added in commit, total lines deleted in commit, and has bug fixing. It calculates the McCabe's complexity metric using the radon.complexity module and adjusts the complexity metric if the commit includes bug fixing. The function then calculates the code complexity score by scaling the complexity metric to a range of 0.0 to 5.0. The function returns the calculated code complexity score.
 | Value | Meaning |
 | --- | --- |
 | Integer | Complexity calculated |
 
-communication: 
+communication: <br>
 If the auther and committer were the same person, communication is estimated to be 0 or else 1.
 | Value | Meaning |
 | --- | --- |
 | 0 | Author and Committer the same person. |
 | 1 | Author and Committer are different. |
 
-duration: 
+duration: <br>
 Assumption: The Tasks are not done on all the same branch. They are merged in the `main` or `master` branch in the end.
 But, the work commit steps were  not done there.
 
