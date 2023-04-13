@@ -1,36 +1,54 @@
-
-def calculate_code_quality(total_files_affected, total_files_changed, total_lines_added_in_commit,
-                           total_lines_deleted_in_commit, file_additions, file_deletions, has_refactoring):
-    """
-    Calculates the code quality score based on the number of files affected, the number of files changed, the total 
-    lines added in the commit, the total lines deleted in the commit, the number of file additions and the number of 
-    file deletions, and whether the commit includes code refactoring.
-
-    Returns a score between 0.0 and 5.0, rounded to 1 decimal place.
-    """
-    if total_files_affected == 0 or total_files_changed == 0:
-        return 0.0
-
-    # calculate the percentage of lines added to the total number of lines changed
-    if total_lines_added_in_commit + total_lines_deleted_in_commit == 0:
-        lines_added_percentage = 0
-    else:
-        lines_added_percentage = total_lines_added_in_commit / \
-            (total_lines_added_in_commit + total_lines_deleted_in_commit)
-
-    # calculate the percentage of files added to the total number of files changed
-    if file_additions + file_deletions == 0:
-        files_added_percentage = 0
-    else:
-        files_added_percentage = file_additions / \
-            (file_additions + file_deletions)
-
-    # calculate the score based on the percentage of lines added, files added, and whether refactoring occurred
+def calculate_code_quality(total_files_affected, total_files_changed, total_lines_added_in_commit, total_lines_deleted_in_commit, file_additions, file_deletions, has_refactoring):
+    # calculate the total number of lines changed in the commit
+    total_lines_changed = total_lines_added_in_commit + total_lines_deleted_in_commit
+    
+    # calculate the CCP metric
+    ccp = 0
+    if total_files_changed > 0 and total_lines_changed > 0:
+        ccp = total_files_affected / (total_files_changed * total_lines_changed)
+    
+    # adjust the CCP metric if the commit includes refactoring
     if has_refactoring:
-        score = (lines_added_percentage * 0.5 +
-                 files_added_percentage * 0.3 + 0.2) * 5.0
-    else:
-        score = (lines_added_percentage * 0.7 +
-                 files_added_percentage * 0.3) * 5.0
+        ccp *= 2
+    
+    # calculate the percentage of lines added to the total number of lines changed
+    lines_added_percentage = 0
+    if total_lines_added_in_commit + total_lines_deleted_in_commit > 0:
+        lines_added_percentage = total_lines_added_in_commit / (total_lines_added_in_commit + total_lines_deleted_in_commit)
+    
+    # calculate the code quality score
+    code_quality_score = 5.0 * (ccp + lines_added_percentage) / 2.0
+    
+    # round the score to 1 decimal place
+    code_quality_score = round(code_quality_score, 1)
+    
+    # return the code quality score
+    return code_quality_score
 
-    return round(score, 1)
+
+# Sources
+
+# arxiv (https://arxiv.org/pdf/2007.10912.pdf)
+# 1. The Corrective Commit Probability Code Quality Metric
+# Abstract—We present a code quality metric, Corrective Commit Proba- bility (CCP), 
+# measuring the probability that a commit reflects corrective ...
+
+# arxiv (https://arxiv.org/pdf/2007.10912.pdf)
+# 2. The Corrective Commit Probability Code Quality Metric
+# We present a code quality metric, Corrective Commit Probability (CCP), measuring the 
+# probability that a commit reflects corrective maintenance.
+
+# semanticscholar (https://www.semanticscholar.org/paper/The-Corrective-Commit-Probability-Code-Quality-Amit-Feitelson/1613bad06e6540f93d69100ee477628950f1799d)
+# 3. [PDF] The Corrective Commit Probability Code Quality Metric
+# We present a code quality metric, Corrective Commit Probability (CCP), measuring 
+# the probability that a commit reflects corrective ...
+
+# Realpython (https://realpython.com/python-code-quality/)
+# 4. Python Code Quality: Tools & Best Practices
+# In this article, we'll identify high-quality Python code and show you how to improve the quality 
+# of your own code. We'll analyze and compare tools you can ...
+
+# igor (https://www.igor.pro.br/publica/papers/EMSE2020.pdf)
+# 5. Code and Commit Metrics of Developer Productivity
+# Based on commit information, we calculated the productivity of each developer by applying each 
+# commit-based metrics to their commits in the ...

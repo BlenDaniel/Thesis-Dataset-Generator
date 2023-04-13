@@ -3,7 +3,7 @@ import spacy
 nlp = spacy.load("en_core_web_sm")
 
 # Define keywords and phrases for each category
-feature_keywords = ["add", "new", "feature", "functionality",
+feature_keywords = ["feature", "add", "new", "feature", "functionality",
                     "enhancement", "improvement", "capability", "option"]
 bug_keywords = ["fix", "error", "bug", "issue",
                 "problem", "crash", "fault", "flaw"]

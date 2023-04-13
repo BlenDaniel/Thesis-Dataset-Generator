@@ -1,58 +1,57 @@
+import radon.complexity as rdc
 
-def calculate_task_complexity(total_files_affected, total_files_changed, total_lines_added_in_commit,
-                              total_lines_deleted_in_commit, has_bug_fixing):
-    """
-    Calculates the task complexity based on the number of files affected, files changed,
-    lines added, lines deleted in a commit, and whether the commit includes a bug fixing.
-    The higher the number of affected files, files changed, and lines added/deleted,
-    the higher the task complexity. Also, a commit with a bug fixing is considered more complex.
-    Returns a float between 1 and 5, where 5 represents the highest task complexity.
-    """
-
-    task_file_complexity = get_file_complexity_rating(
-        total_files_affected, total_files_changed)
-    task_lines_complexity = get_lines_complexity_rating(
-        total_lines_added_in_commit, total_lines_deleted_in_commit)
-
-    # calculate overall task complexity based on the complexity ratings and bug fixing
-    task_complexity = task_file_complexity + task_lines_complexity
-
+def calculate_code_complexity(total_files_affected, total_files_changed, total_lines_added_in_commit, total_lines_deleted_in_commit, has_bug_fixing):
+    # calculate the McCabe's complexity metric
+    complexity = 0
+    if total_files_changed > 0 and total_lines_added_in_commit > 0:
+        complexity = rdc.cc_visit(".", ignore="venv", multi=True)
+    
+    # adjust the complexity metric if the commit includes bug fixing
     if has_bug_fixing:
-        task_complexity *= 1.2
-    return min((5 * task_complexity) / 10, 5.0)
+        complexity *= 2
+    
+    # calculate the code complexity score
+    code_complexity_score = 5.0 * complexity / 100.0
+    
+    # round the score to 1 decimal place
+    code_complexity_score = round(code_complexity_score, 1)
+    
+    # return the code complexity score
+    return code_complexity_score
+
+# # example usage
+# total_files_affected = 10
+# total_files_changed = 5
+# total_lines_added_in_commit = 100
+# total_lines_deleted_in_commit = 50
+# has_bug_fixing = True
+
+# code_complexity_score = calculate_code_complexity(total_files_affected, total_files_changed, total_lines_added_in_commit, total_lines_deleted_in_commit, has_bug_fixing)
+
+# print("Code complexity score:", code_complexity_score)
 
 
-def get_file_complexity_rating(total_files_affected, total_files_changed):
-    # Minimal: 0-2 files affected or changed
-    if total_files_affected + total_files_changed <= 10:
-        return 1
-    # Low: 3-5 files affected or changed
-    elif total_files_affected + total_files_changed <= 20:
-        return 2
-    # Moderate: 6-9 files affected or changed
-    elif total_files_affected + total_files_changed <= 50:
-        return 3
-    # High: 10-15 files affected or changed
-    elif total_files_affected + total_files_changed <= 100:
-        return 4
-    # Very High: 16+ files affected or changed
-    else:
-        return 5
+# github (https://github.com/rubik/radon) 
+# 1. rubik/radon: Various code metrics for Python code
+# Radon is a Python tool that computes various metrics from the source code. Radon can compute:
+# McCabe's complexity, i.e. cyclomatic complexity; raw metrics ( ...
 
+# stribny (https://stribny.name/blog/2019/05/measuring-python-code-complexity-with-wily/)
+# 2. Measuring Python code complexity with wily
+# There is a project called wily based on Halstead complexity measures that we can use to measure 
+# complexity in Python projects. There was a talk ...
 
-def get_lines_complexity_rating(total_lines_added_in_commit, total_lines_deleted_in_commit):
-    # Minimal: 0-10 lines added or deleted
-    if total_lines_added_in_commit + total_lines_deleted_in_commit <= 50:
-        return 1
-    # Low: 11-50 lines added or deleted
-    elif total_lines_added_in_commit + total_lines_deleted_in_commit <= 100:
-        return 2
-    # Moderate: 51-200 lines added or deleted
-    elif total_lines_added_in_commit + total_lines_deleted_in_commit <= 200:
-        return 3
-    # High: 201-500 lines added or deleted
-    elif total_lines_added_in_commit + total_lines_deleted_in_commit <= 500:
-        return 4
-    # Very High: 501+ lines added or deleted
-    else:
-        return 5
+# stackoverflow (https://stackoverflow.com/questions/72248841/calculate-cyclomatic-complexity-from-file-in-different-programming-language-via)
+# 3. Calculate cyclomatic complexity from file in different ...
+# The easiest method is probably to call and parse the output of Metrics.exe . If you don't provide
+# /out , it will print to stdout, ...
+
+# towardsdatascience (https://towardsdatascience.com/simplify-your-python-code-automating-code-complexity-analysis-with-wily-5c1e90c9a485?gi=51449b2406d1)
+# 4. Simplify your Python Code: Automating Code Complexity ...
+# Developed by Thomas McCabe in 1976, the metric is calculated from a function's control flow graph, 
+# which consists of nodes and edges. Nodes and ...
+
+# realpython (https://realpython.com/python-refactoring/)
+# 5. Refactoring Python Applications for Simplicity
+# Lines of Code; Maintainability Index; Cyclomatic Complexity. Those are the 3 default metrics in wily. 
+# To see those metrics for a specific file (such as ...

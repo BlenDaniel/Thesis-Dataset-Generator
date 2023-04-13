@@ -179,7 +179,7 @@ def analyze_tasks(json_obj, output, experience_path):
                          "committer_experience",
                          "code_quality",
                          "code_complexity",
-                         "duration",
+                         "communication",
                          ])
 
         for task in tasks:

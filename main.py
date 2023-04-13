@@ -5,9 +5,9 @@ from analysis.tasks import task_analysis
 from utils import file_utils, data_utils
 
 # Set up the paths to the CSV and JSON files
-csv_path = 'data/travis-web/travis-web.csv'  # file_utils.choose_file()
-json_path = 'data/travis-web/travis-web.json'  # file_utils.choose_file()
-save_path = file_utils.save_path() + 'travis-web/'
+csv_path = 'data/knox/knox.csv'  # file_utils.choose_file()
+json_path = 'data/knox/knox.json'  # file_utils.choose_file()
+save_path = file_utils.save_path() + 'knox/'
 
 # Load Json from the path and convert it
 json_obj = file_utils.read_json_file(json_path)
