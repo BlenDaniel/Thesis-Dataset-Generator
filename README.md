@@ -1,6 +1,6 @@
 # Useable Data Generator
 
-This is a repository to generate useable data from any github project. 
+This is a repository to generate useable dataset of github project. The datasets will contain fields and propeties of a commit, like whether it is a bug, it's task type, committer experience in the project etc.  
 
 1. Requirements
     - CSV: 
